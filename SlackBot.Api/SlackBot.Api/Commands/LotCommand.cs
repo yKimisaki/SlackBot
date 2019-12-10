@@ -30,7 +30,7 @@ namespace Minamo.SlackBot.Models.Edge
         public override ValueTask<string> CreateOutputAsync(string user, string channel, string filteredKeyword, string rawWords)
         {
             var index = Math.Abs((user + DateTime.Now.Date.ToString()).GetHashCode()) % results.Count;
-            return new ValueTask<string>($"今日のあなたの運勢は{results[index]}よ！");
+            return new ValueTask<string>($"今日のあなたの運勢は{results[index]}です。");
         }
     }
 }

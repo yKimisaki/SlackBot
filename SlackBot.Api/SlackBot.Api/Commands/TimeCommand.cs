@@ -17,7 +17,7 @@ namespace Minamo.SlackBot.Models.Edge
 
         public override ValueTask<string> CreateOutputAsync(string user, string channel, string filteredKeyword, string rawWords)
         {
-            return new ValueTask<string>($"今は{DateTime.Now.ToString("tthh時mm分ss秒")}よ。");
+            return new ValueTask<string>($"今は{DateTime.Now.ToString("tthh時mm分ss秒")}。");
         }
     }
 }
