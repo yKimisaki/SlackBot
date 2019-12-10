@@ -24,37 +24,43 @@ namespace SlackBot.Api
 
         [HttpPost]
         [Consumes("application/x-www-form-urlencoded")]
-        public string Info([FromForm]string text, [FromForm]string channel_id, [FromForm]string user_name)
+        public string ExecuteCommand([FromForm]string text, [FromForm]string channel_id, [FromForm]string user_name)
         {
             logger.LogInformation($"Command: text: {text}, channel: {channel_id}, username: {user_name}");
 
             try
             {
                 var result = CommandExecutor.ExecuteAsync(user_name, channel_id, text).Result;
-                using (var httpClient = new HttpClient())
+                if (result.IsBroadcast)
                 {
-                    var response = new Dictionary<string, string>
+                    using (var httpClient = new HttpClient())
                     {
-                        { "token",  BotToken },
-                        { "channel", channel_id },
-                        { "text", $"<@{user_name}> {result}" },
-                        { "reply_broadcast", result.IsBroadcast ? "true" : "false" },
-                        { "username", BotName},
-                    };
-                    var content = new FormUrlEncodedContent(response);
-                    httpClient.PostAsync("https://slack.com/api/chat.postMessage", content).Wait();
+                        var response = new Dictionary<string, string>
+                        {
+                            { "token",  BotToken },
+                            { "channel", channel_id },
+                            { "text", $"<@{user_name}> {result}" },
+                            { "username", BotName},
+                        };
+                        var content = new FormUrlEncodedContent(response);
+                        httpClient.PostAsync("https://slack.com/api/chat.postMessage", content).Wait();
+                    }
+                    return "";
+                }
+                else
+                {
+                    return $"{result.Output}";
                 }
             }
             catch (CommandNotFoundException)
             {
                 logger.LogWarning($"Command is not found.");
+                return $"コマンドが見つかりませんでした。";
             }
             catch
             {
                 throw;
             }
-
-            return "";
         }
     }
 }
