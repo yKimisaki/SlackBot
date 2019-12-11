@@ -2,7 +2,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace Minamo.SlackBot.Models.Edge
+namespace SlackBot.Api.Commands
 {
     internal class DateCommand : CommandBase
     {

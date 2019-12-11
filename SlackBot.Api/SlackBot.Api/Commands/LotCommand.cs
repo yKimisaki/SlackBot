@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Minamo.SlackBot.Models.Edge
+namespace SlackBot.Api.Commands
 {
     internal class LotCommand : CommandBase
     {

@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Minamo.SlackBot.Models.Edge
+namespace SlackBot.Api.Commands
 {
     internal class TrainCommand : CommandBase
     {

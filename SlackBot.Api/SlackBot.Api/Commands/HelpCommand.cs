@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Minamo.SlackBot.Models.Edge
+namespace SlackBot.Api.Commands
 {
     internal class HelpCommand : CommandBase
     {
