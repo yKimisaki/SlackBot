@@ -11,6 +11,7 @@ namespace SlackBot.Api
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            AppSettings.Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }

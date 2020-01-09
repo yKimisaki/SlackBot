@@ -14,9 +14,6 @@ namespace SlackBot.Api
     {
         private readonly ILogger logger;
 
-        private const string BotName = "";
-        private const string BotToken = "";
-
         public CommandController(ILogger<CommandController> logger)
         {
             this.logger = logger;
@@ -37,10 +34,10 @@ namespace SlackBot.Api
                     {
                         var response = new Dictionary<string, string>
                         {
-                            { "token",  BotToken },
+                            { "token",  AppSettings.AccessToken },
                             { "channel", channel_id },
                             { "text", $"<@{user_name}> {result}" },
-                            { "username", BotName},
+                            { "username", AppSettings.BotName },
                         };
                         var content = new FormUrlEncodedContent(response);
                         httpClient.PostAsync("https://slack.com/api/chat.postMessage", content).Wait();
